@@ -23,7 +23,7 @@ This is the backend server for the Collaborative Notes App. It is built with Nod
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/yourusername/collaborative-notes-app.git
+   git clone https://github.com/naziranwer/collaborative-notes-app-server.git
    cd collaborative-notes-app/server
    ```
 
@@ -62,13 +62,13 @@ The following environment variables need to be set in the `.env` file:
 - `POST /api/auth/register`
 
   - Description: Register a new user.
-  - Request Body: `{ "username": "string", "email": "string", "password": "string" }`
-  - Response: `{ "token": "string", "user": { "id": "string", "username": "string", "email": "string" } }`
+  - Request Body: `{ "name": "string", "email": "string", "password": "string" }`
+  - Response: `{ "token": "string", "user": { "id": "string", "name": "string", "email": "string" } }`
 
 - `POST /api/auth/login`
   - Description: Log in an existing user.
   - Request Body: `{ "email": "string", "password": "string" }`
-  - Response: `{ "token": "string", "user": { "id": "string", "username": "string", "email": "string" } }`
+  - Response: `{ "token": "string", "user": { "id": "string", "name": "string", "email": "string" } }`
 
 ### Notes
 
@@ -103,7 +103,7 @@ The following environment variables need to be set in the `.env` file:
 - `POST /api/notes/:id/collaborators`
 
   - Description: Add a collaborator to a note.
-  - Request Body: `{ "email": "string", "role": "string" }`
+  - Request Body: `{ "collaboratorId": "string", "permission": "string" }`
   - Response: `{ "message": "Collaborator added successfully" }`
 
 - `DELETE /api/notes/:id/collaborators/:collaboratorId`
