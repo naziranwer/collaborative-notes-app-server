@@ -10,6 +10,29 @@ This is the backend server for the Collaborative Notes App. It is built with Nod
 - [Contributing](#contributing)
 - [License](#license)
 
+## Architecture
+
+The Collaborative Notes App follows a modern web application architecture with a clear separation of concerns between the frontend and backend. Here is a brief overview of the architecture:
+
+### Backend
+
+- **Node.js and Express**: The backend server is built using Node.js and Express, providing a robust and scalable environment for handling HTTP requests and managing application logic.
+- **MongoDB**: MongoDB is used as the database to store user information, notes, and version history. It provides a flexible schema design and powerful querying capabilities.
+- **Mongoose**: Mongoose is used as an ODM (Object Data Modeling) library to interact with MongoDB, providing a straightforward way to define schemas and models.
+- **Authentication**: User authentication is handled using JWT (JSON Web Tokens), ensuring secure access to protected routes and resources.
+- **Real-time Updates**: Real-time updates are managed using WebSockets, allowing users to see changes to notes in real-time.
+
+### Frontend
+
+- **React and Vite**: The frontend client is built using React and Vite, providing a fast and responsive user interface.
+- **React Router**: React Router is used for client-side routing, enabling seamless navigation between different pages and components.
+- **Tailwind CSS**: Tailwind CSS is used for styling, providing a utility-first approach to design and ensuring a consistent look and feel across the application.
+
+### Communication
+
+- **RESTful API**: The backend exposes a RESTful API for the frontend to interact with. This includes endpoints for user registration, login, note management, and collaborator management.
+- **WebSockets**: WebSockets are used for real-time communication between the client and server, allowing users to see updates to notes as they happen.
+
 ## Installation
 
 ### Prerequisites
