@@ -21,7 +21,7 @@ const NoteSchema = new mongoose.Schema(
     updatedAt: { type: Date, default: Date.now },
   },
   {
-    timestamps: { createdAt: "createdAt", updatedAt: "updatedAt" }, // This will auto-manage createdAt and updatedAt
+    timestamps: { createdAt: "createdAt", updatedAt: "updatedAt" },
   }
 );
 

@@ -1,14 +1,31 @@
 const Note = require("../models/Note");
 
 module.exports = (socket, io) => {
-  // Join a specific note room
-  socket.on("joinNote", async ({ noteId }) => {
-    try {
-      socket.join(noteId);
-      console.log(`User joined note: ${noteId}`);
-    } catch (err) {
-      console.error("Error joining note room:", err.message);
-    }
+  socket.on("joinNote", async ({ noteId, user }) => {
+    socket.join(noteId);
+    socket.name = user.name;
+    console.log(` ${user.name} joined note ${noteId}`);
+
+    // Notify other users in the room about the new user
+    socket.to(noteId).emit("userJoined", user);
+
+    const activeUsers = Array.from(
+      io.sockets.adapter.rooms.get(noteId) || []
+    ).map((socketId) => {
+      const socket = io.sockets.sockets.get(socketId);
+
+      return { id: socket.id, name: socket.name };
+    });
+
+    socket.emit("activeUsers", activeUsers);
+  });
+
+  socket.on("leaveNote", ({ noteId, user }) => {
+    socket.leave(noteId);
+    console.log(`${user.name} left note ${noteId}`);
+
+    // Notify other users in the room about the user leaving
+    socket.to(noteId).emit("userLeft", user);
   });
 
   // Handle note updates
@@ -59,6 +76,10 @@ module.exports = (socket, io) => {
     }
   });
 
+  socket.on("cursorPosition", ({ noteId, userId, range }) => {
+    console.log("noteId", noteId, "userId", userId, "range", range);
+    socket.to(noteId).emit("cursorPosition", { userId, range });
+  });
   // Handle user disconnect
   socket.on("disconnect", () => {
     console.log("A user disconnected:", socket.id);

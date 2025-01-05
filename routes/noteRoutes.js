@@ -35,6 +35,7 @@ router.put(
   permissionMiddleware.isCreator,
   addCollaborator
 );
+router.put("/:noteId/invitation", authMiddleware, addCollaborator);
 router.put("/:noteId/revert/:versionIndex", authMiddleware, revertToVersion);
 
 module.exports = router;
